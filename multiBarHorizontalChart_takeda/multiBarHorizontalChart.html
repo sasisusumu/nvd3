@@ -18,99 +18,28 @@
         html, body, #chart1, svg {
             margin: 0px;
             padding: 0px;
+            height: 95%;
+            width: 95%;
+        }
+        #svg {
+            margin: 0px;
+            padding: 0px;
             height: 100%;
-            width: 100%;
+            width: 100%;          
         }
     </style>
 </head>
 <body>
+<div id="svg">
 
-<div id="chart1">
+  <div id="chart1">
     <svg></svg>
+  </div>
+
 </div>
 
-<script>
-var dataset = [
-  {
-    "key": "ベンザブロックS",
-    "values": [
-      { "label": "アセトアミノフェン",  "value": 900, "effect": "熱をさげ、痛みを和らげる" },
-      { "label": "ヨウ化イソプロパミド",  "value": 6, "effect": "鼻水を和らげる" },
-      { "label": "d－クロルフェニラミンマレイン酸塩", "value": 3.5, "effect": "鼻水・くしゃみを和らげる" },
-      { "label": "トラネキサム酸", "value": 420, "effect": "のどの痛みを和らげる" },
-      { "label": "ジヒドロコデインリン酸塩", "value": 24, "effect": "せきを和らげる" },
-      { "label": "イブプロフェン", "value": 0, "effect": "熱をさげ、痛みを和らげる" },
-      { "label": "塩酸プソイドエフェドリン", "value": 0, "effect": "鼻づまり・鼻水を和らげる" },
-      { "label": "クロルフェニラミンマレイン酸塩", "value": 0, "effect": "鼻水・くしゃみを和らげる" },
-      { "label": "dl－メチルエフェドリン塩酸塩", "value": 60, "effect": "せき・たんを和らげる" },
-      { "label": "ジヒドロコデインリン酸塩", "value": 0, "effect": "せきを和らげる" },
-      { "label": "無水カフェイン", "value": 75, "effect": "頭痛を和らげる" },
-      { "label": "ヘスペリジン", "value": 90, "effect": "ビタミン類（ビタミンPの一種" }
-    ]
-  },
-  {
-    "key": "ベンザブロックL",
-    "values": [
-      { "label": "アセトアミノフェン", "value": 0, "effect": "熱をさげ、痛みを和らげる" },
-      { "label": "ヨウ化イソプロパミド", "value": 0, "effect": "鼻水を和らげる" },
-      { "label": "d－クロルフェニラミンマレイン酸塩", "value": 0, "effect": "鼻水・くしゃみを和らげる" },
-      { "label": "トラネキサム酸", "value": 0, "effect": "のどの痛みを和らげる" },
-      { "label": "ジヒドロコデインリン酸塩", "value": 0, "effect": "せきを和らげる" },
-      { "label": "イブプロフェン", "value": 450, "effect": "熱をさげ、痛みを和らげる" },
-      { "label": "塩酸プソイドエフェドリン", "value": 135, "effect": "鼻づまり・鼻水を和らげる" },
-      { "label": "クロルフェニラミンマレイン酸塩", "value": 7.5, "effect": "鼻水・くしゃみを和らげる" },
-      { "label": "dl－メチルエフェドリン塩酸塩", "value": 0, "effect": "せき・たんを和らげる" },
-      { "label": "ジヒドロコデインリン酸塩", "value": 24, "effect": "せきを和らげる" },
-      { "label": "無水カフェイン", "value": 75, "effect": "頭痛を和らげる" },
-      { "label": "ヘスペリジン", "value": 0, "effect": "ビタミン類（ビタミンPの一種" }
-    ]
-  },
-  {
-    "key": "ベンザブロックIP",
-    "values": [
-      { "label": "アセトアミノフェン", "value": 0, "effect": "熱をさげ、痛みを和らげる" },
-      { "label": "ヨウ化イソプロパミド", "value": 0, "effect": "鼻水を和らげる" },
-      { "label": "d－クロルフェニラミンマレイン酸塩", "value": 0, "effect": "鼻水・くしゃみを和らげる" },
-      { "label": "トラネキサム酸", "value": 0, "effect": "のどの痛みを和らげる" },
-      { "label": "ジヒドロコデインリン酸塩", "value": 0, "effect": "せきを和らげる" },
-      { "label": "イブプロフェン", "value": 450, "effect": "熱をさげ、痛みを和らげる" },
-      { "label": "塩酸プソイドエフェドリン", "value": 0, "effect": "鼻づまり・鼻水を和らげる" },
-      { "label": "クロルフェニラミンマレイン酸塩", "value": 7.5, "effect": "鼻水・くしゃみを和らげる" },
-      { "label": "dl－メチルエフェドリン塩酸塩", "value": 60, "effect": "せき・たんを和らげる" },
-      { "label": "ジヒドロコデインリン酸塩", "value": 24, "effect": "せきを和らげる" },
-      { "label": "無水カフェイン", "value": 75, "effect": "頭痛を和らげる" },
-      { "label": "ヘスペリジン", "value": 90, "effect": "ビタミン類（ビタミンPの一種）" }
-    ]
-  }
-];
+<script src="chart.js"></script>
 
-var chart;
-
-nv.addGraph(function() {
-    chart = nv.models.multiBarHorizontalChart()
-        .x(function(d) { return d.label; })
-        .y(function(d) { return d.value; })
-        .barColor(d3.scale.category20().range())
-        .duration(250)
-        .margin({left: 100})
-        .showValues(true)
-        .stacked(false);
-    chart.yAxis.tickFormat(d3.format(',.1f'));
-    chart.yAxis.axisLabel('Y Axis');
-    chart.xAxis.axisLabel('X Axis').axisLabelDistance(20);
-    d3.select('#chart1 svg')
-        .datum(dataset)
-        .call(chart);
-    nv.utils.windowResize(chart.update);
-    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
-    chart.state.dispatch.on('change', function(state){
-        nv.log('state', JSON.stringify(state));
-    });
-    return chart;
-});
-
-
-</script>
 </body>
 </html>
 
